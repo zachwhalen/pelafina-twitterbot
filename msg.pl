@@ -5,7 +5,8 @@ use Scalar::Util 'blessed';
 use strict;
 
 # initialize variables                                                                                                                                                                                                                      
-my ($txt, @sentences, @beginnings, @arr, %db, $print_msg, $max, $src, $stemlength, $stem, @lens, $consumer_secret, $consumer_key, $access_token, $access_token_secret);
+my ($txt, @sentences, @beginnings, @arr, %db, $print_msg, $max, $src, $stemlength, $stem, 
+@lens, $consumer_secret, $consumer_key, $access_token, $access_token_secret);
 
 # SETUP -----------------------------------------------------------------------------
 # Full path to the source .txt file
