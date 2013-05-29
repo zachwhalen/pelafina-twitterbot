@@ -5,20 +5,29 @@ use Scalar::Util 'blessed';
 
 use strict;
 
-# some variables                                                                                                                                                                                                                      
+# initialize variables                                                                                                                                                                                                                      
 
 my ($txt, @sentences, @beginnings, @arr, %db, $print_msg, $max, $src, $stemlength, $stem, @lens);
 
-@lens = (1, 1, 1, 1, 2, 3, 4, 8);
+# Set up
+$src = ''; # Full path to the source .txt file
 
-$max = 80 + rand(50);
-#$stemlength = $lens[rand($#lens)];                                                                                                                                                                                                   
+
+
+# Options set up
+# This sets the final message length to be somewhere between 80 and 130 characters.
+
+$max = 80 + rand(50); 
+
+
+# Set the length of "tails" or "stems" stored in the DB hash. 
+# Setting this to 1 is a standard first-order Markov chain. 
+# Setting it to n will produce chains of n-grams
+
 $stemlength = 1;
+                                                                                                                                                                                                       
 
 
-#$max = 140;                                                                                                                                                                                                                          
-
-$src = '/home/gameolog/pg/pelafina/whalestoe.txt';
 
 open READ, $src or die "Could not find source file!";;
 
