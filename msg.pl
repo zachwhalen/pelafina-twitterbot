@@ -7,12 +7,15 @@ use strict;
 # initialize variables                                                                                                                                                                                                                      
 my ($txt, @sentences, @beginnings, @arr, %db, $print_msg, $max, $src, $stemlength, $stem, @lens);
 
-# SETUP
-$src = ''; # Full path to the source .txt file
+# SETUP -----------------------------------------------------------------------------
+# Full path to the source .txt file
+$src = ''; 
+
+# Twitter API settings
 
 
 
-# OPTIONS
+# OPTIONS ---------------------------------------------------------------------------
 # This sets the final message length to be somewhere between 80 and 130 characters.
 $max = 80 + rand(50); 
 
@@ -27,6 +30,8 @@ $stemlength = 1;
 #$stemlength = $lens[rand($#lens)];
 
 
+
+# LEARN ------------------------------------------------------------------------------
 open READ, $src or die "Could not find source file!";;
 
 while (<READ>){
@@ -43,21 +48,17 @@ for (my $i = 0; $i < $#arr; $i++){
     unless (defined $db{$arr[$i]}){
         $db{$arr[$i]} = [];
     }
-
     for (my $l = 1; $l <= $stemlength; $l++){
         $stem .= $arr[$i + $l] . " ";
     }
-
     push (@{$db{$arr[$i]}}, $stem);
-
-
-
-
 }
 
 
 map { push(@beginnings, $_) if (/^[A-Z]/) } keys %db;
 
+
+# CONSTRUCT ---------------------------------------------------------------------------
 for (my $t = 0; $t < 10; $t++){
       my $sent = $beginnings[rand($#beginnings)] . " ";
       while (length($sent) < 140){
@@ -65,7 +66,6 @@ for (my $t = 0; $t < 10; $t++){
             my @from = @{$db{$sofar[$#sofar]}};
             my $next = $from[rand($#from)];
             $sent .= "$next ";
-
             if ($next =~ /(\.|\?|\!)\s*$/){
                   last;
             }
@@ -77,15 +77,11 @@ foreach (@sentences){
     if (length($print_msg) + length($_) < $max){
         $print_msg .= $_;
     }
-
 }
 
-$print_msg =~ s/\s\s/ /g;
+$print_msg =~ s/\s\s/ /g; # trimming out any doubled spaces
 
-#print length($print_msg) . "\n $print_msg \n";                                                                                                                                                                                       
-
-#DO A TWEET                                                                                                                                                                                                                           
-
+# TWEET ----------------------------------------------------------------------------
 #twitter config                                                                                                                                                                                                                       
  my $nt = Net::Twitter->new(
       traits   => [qw/API::RESTv1_1/],
