@@ -2,31 +2,29 @@
 
 use Net::Twitter;
 use Scalar::Util 'blessed';
-
 use strict;
 
 # initialize variables                                                                                                                                                                                                                      
-
 my ($txt, @sentences, @beginnings, @arr, %db, $print_msg, $max, $src, $stemlength, $stem, @lens);
 
-# Set up
+# SETUP
 $src = ''; # Full path to the source .txt file
 
 
 
-# Options set up
+# OPTIONS
 # This sets the final message length to be somewhere between 80 and 130 characters.
-
 $max = 80 + rand(50); 
 
 
 # Set the length of "tails" or "stems" stored in the DB hash. 
 # Setting this to 1 is a standard first-order Markov chain. 
 # Setting it to n will produce chains of n-grams
-
 $stemlength = 1;
-                                                                                                                                                                                                       
-
+                                  
+# Optionally, uncomment the next two lines to choose the stem length randomly from the @lens list
+#@lens = (1,1,1,2,2,4);
+#$stemlength = $lens[rand($#lens)];
 
 
 open READ, $src or die "Could not find source file!";;
