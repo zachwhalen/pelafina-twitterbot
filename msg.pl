@@ -11,8 +11,12 @@ my ($txt, @sentences, @beginnings, @arr, %db, $print_msg, $max, $src, $stemlengt
 # Full path to the source .txt file
 $src = ''; 
 
-# Twitter API settings
-
+# Your Twitter API settings
+# Get these from https://dev.twitter.com/apps -- and don't forget to set your app to Read/Write access!
+$consumer_key = '';    
+$consumer_secret = '';
+$access_token = '';
+$access_token_secret => '';
 
 
 # OPTIONS ---------------------------------------------------------------------------
@@ -85,10 +89,10 @@ $print_msg =~ s/\s\s/ /g; # trimming out any doubled spaces
 #twitter config                                                                                                                                                                                                                       
  my $nt = Net::Twitter->new(
       traits   => [qw/API::RESTv1_1/],
-     consumer_key => '',
-     consumer_secret => '',
-     access_token => '',
-     access_token_secret => '',
+     consumer_key => $consumer_key,
+     consumer_secret => $consumer_secret,
+     access_token => $access_token,
+     access_token_secret => $access_token_secret,
 
     );
 
