@@ -22,3 +22,4 @@ package, and I want it to run every hour at :45 after, so mine looks something l
 45  *	*	*	*	perl -I /home/...<user path>.../perl5/lib/perl5/ /home/...<user path>.../pelafina/msg.pl
 </pre>
 
+I wrote <a href="http://www.zachwhalen.net/blog/13/jul/twitter-bots-markov-chains-and-large-slices-clarity">a blog entry</a> about this project.
